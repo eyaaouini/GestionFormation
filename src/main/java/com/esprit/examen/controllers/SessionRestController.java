@@ -13,28 +13,31 @@ import com.esprit.examen.entities.Session;
 import com.esprit.examen.services.ISessionService;
 
 @RestController
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
 public class SessionRestController {
 
 	@Autowired
 	ISessionService sessionService;
-	
+
 	@PostMapping("/ajouterSession")
 	@ResponseBody
 	public Session ajouterSession(@RequestBody Session session) {
-		sessionService.addSession(session);
+		sessionService.modifierAddSession(session);
 		return session;
 	}
 
 	@PutMapping("/modifierSession")
 	@ResponseBody
 	public Session modifierSession(@RequestBody Session session) {
-		sessionService.addSession(session);
+		sessionService.modifierAddSession(session);
 		return session;
 	}
-	
+
 	@PutMapping("/affecterFormateurASession/{formateurId}/{sessionId}")
 	@ResponseBody
-	public String affecterFormateurASession(@PathVariable("formateurId")  Long formateurId, @PathVariable("sessionId") Long sessionId) {
+	public String affecterFormateurASession(@PathVariable("formateurId") Long formateurId,
+			@PathVariable("sessionId") Long sessionId) {
 		sessionService.affecterFormateurASession(formateurId, sessionId);
 		return "formateur affecté correctement";
 	}
@@ -42,6 +45,8 @@ public class SessionRestController {
 	@DeleteMapping("/supprimerSession/{sessionId}")
 	@ResponseBody
 	public void supprimerSession(@PathVariable("sessionId") Long sessionId) {
-		sessionService.supprimerSession(sessionId);
+		Session s = new Session();
+		s.setId(sessionId);
+		sessionService.supprimerSession(s);
 	}
 }
