@@ -55,7 +55,7 @@ public class SessionTest {
 		us.modifierAddSession(session);
 		assertTrue((session.getDateFin().compareTo(currentDate)) < 0);
 		us.supprimerSession(session);
-		l.info("sesionDelete: " + session);
+		l.info("sesionDelete:" + session);
 
 	}
 
